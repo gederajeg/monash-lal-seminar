@@ -1,9 +1,4 @@
 # correspondence analysis script for data from `happyr` package
-# knitr::opts_chunk$set(fig.width = 6, 
-#                       fig.asp = 0.618,
-#                       dpi = 300,
-#                       echo = FALSE)
-# knitr::knit_hooks$set(webgl = rgl::hook_webgl)
 library(tidyverse)
 library(FactoMineR)
 library(factoextra)
@@ -148,14 +143,6 @@ dim_1_2 <- ggplot(ca_res_tidy, aes(x = dim_1, y = dim_2)) +
   geom_vline(xintercept = 0, colour = "gray75") +
   theme_light() +
   
-  # plot for row elements
-  # geom_point(data = ca_res_row, aes(size = cos2_sum_dim1.2), colour = "blue", show.legend = FALSE) +
-  # ggrepel::geom_text_repel(data = ca_res_row, aes(label = labels, size = contrib_sum_dim1.2), colour = "blue", show.legend = FALSE) +
-  # 
-  # plot for column elements
-  # geom_point(data = ca_res_col, aes(size = cos2_sum_dim1.2), colour = "red", show.legend = FALSE) +
-  # ggrepel::geom_text_repel(data = ca_res_col, aes(label = labels, size = contrib_sum_dim1.2), colour = "red", show.legend = FALSE) +
-  
   geom_text(aes(label = labels), data = labels_df, vjust = "top", hjust = "left", size = 2.65) +
   geom_point(aes(shape = id, colour = id)) +
   geom_text_repel(aes(label = labels, colour = id), show.legend = F, size = 3) +
@@ -185,18 +172,9 @@ dim_1_3 <- ggplot(ca_res_tidy, aes(x = dim_1, y = dim_3)) +
   geom_hline(yintercept = 0, colour = "gray75") +
   geom_vline(xintercept = 0, colour = "gray75") +
   theme_light() +
-  
-  # plot for row elements
-  #geom_point(data = ca_res_row, aes(size = contrib_sum_dim1.3, colour = cos2_sum_dim1.3)) +
-  #ggrepel::geom_text_repel(data = ca_res_row, aes(label = labels, size = cos2_sum_dim1.3), colour = "blue") +
-  # plot for column elements
-  #geom_point(data = ca_res_col, aes(size = contrib_sum_dim1.3, colour = cos2_sum_dim1.3)) +
-  #ggrepel::geom_text_repel(data = ca_res_col, aes(label = labels, size = cos2_sum_dim1.3), colour = "red") +
   geom_text(aes(label = labels, x = 1.0, y = -0.7), data = labels_df2, vjust = "top", hjust = "right", size = 2.65) +
   geom_point(aes(shape = id, colour = id)) +
   geom_text_repel(aes(label = labels, colour = id), show.legend = FALSE, size = 3) +
-  #geom_text(data = filter(ca_res_tidy, !labels %in% c("contained entity", "(un)veiled object")), aes(label = labels, colour = id), show.legend = FALSE, size = 3, nudge_y = -0.025) +
-  #geom_text_repel(data = filter(ca_res_tidy, labels %in% c("contained entity", "(un)veiled object")), aes(label = labels, colour = id), show.legend = FALSE, size = 3) +
   scale_color_manual(values = c("red", "blue"),
                      breaks = c("col", "row"),
                      label = c("synonyms", "metaphors")) +
